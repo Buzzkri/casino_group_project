@@ -23,12 +23,12 @@ class Wallet
 
   def increase_balance
     # increase user balance
-    @wallet += amount  #wallet = wallet - amount
+    @wallet += @amount  #wallet = wallet - amount
   end # end increase_balance
 
   def decrease_balance
     # decrease user balance
-    @wallet += amount  # wallet = amount + wallet
+    @wallet += @amount  # wallet = amount + wallet
   end #end decrease_balance
 end # end Wallet class
 
@@ -39,7 +39,7 @@ class Player < Wallet
     @playername = playername
     super()
     #####TODO Insert Welcome file with ASCII
-    welcome_menu
+    # welcome_menu
   end #end def
 
   def welcome_menu
