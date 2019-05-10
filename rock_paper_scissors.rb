@@ -1,7 +1,7 @@
 
 
 class rock_paper_scissors
-  @rpc = ["Rock"]
+  @rpc = ["Rock", "Paper", "Sciccsors"]
   
   
   end
