@@ -21,14 +21,14 @@ class Wallet
     @wallet
   end #end view_balance
 
-  def increase_balance
+  def increase_balance(amount)
     # increase user balance
-    @wallet += @amount  #wallet = wallet - amount
+    @wallet += amount  #wallet = wallet - amount
   end # end increase_balance
 
-  def decrease_balance
+  def decrease_balance(amount)
     # decrease user balance
-    @wallet += @amount  # wallet = amount + wallet
+    @wallet -= amount  # wallet = amount + wallet
   end #end decrease_balance
 end # end Wallet class
 
@@ -60,7 +60,7 @@ class Player < Wallet
   def player_money
     puts
     @wallet = gets.strip.to_i
-    if @wallet < 0
+    if @wallet <= 0
       puts "Sorry. We don't deal with broke people."
     else
       puts
@@ -69,29 +69,4 @@ class Player < Wallet
   end #end player_money
 end #end class Player
 
-# def first_wallet
-
-# end
-
-# main_menu
-
-#   def rock_paper_scisors
-#     #buzz
-#   end
-
-#   def black_jack
-#     #chris
-#   end
-
-#   def roulette
-#     #pick a color: red and black
-#     #serena
-#   end
-
-#   def slots
-#     #amanda
-#   end
-
-# end
-
-Player.new
+# Player.new

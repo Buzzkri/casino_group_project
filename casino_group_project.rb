@@ -41,18 +41,21 @@ class CasinoProject < Player
     puts "2) Black Jack"
     puts "3) Rock, Paper, Scissors"
     puts "4) High Low"
-    puts "5) Return to Casino Lobby"
+    puts "5) Slots"
+    puts "6) Return to Casino Lobby"
     choice = gets.strip.to_i
     case choice
     when 1
-      #Roulette
+      #Roulette - Serena
     when 2
-      #Black Jack
+      #Black Jack - Chris
     when 3
-      #Rock, Paper, Scissors
+      #Rock, Paper, Scissors - Buzz
     when 4
       #High Low
     when 5
+      #Slots - Amanda
+    when 6
       main_menu
     else
       puts
@@ -78,9 +81,11 @@ class CasinoProject < Player
     when 2
       puts "Withdrawing money now..."
       @withdraw_money = @wallet.to_i
-      decrease_balance(@withdraw_money) #will withdraw the amount and change wallet amount
+      decrease_balance(@withdraw_money) #will withdraw the amount gained
       puts
       puts "You have successfully withdrawn $#{@withdraw_money} from your account."
+      puts "Thank you for visiting our casino!"
+      puts "Please come again! "
       exit
     when 3
       puts
@@ -89,7 +94,7 @@ class CasinoProject < Player
       puts
       print "Enter amount > "
       @deposit_amount = gets.to_i
-      increase_balance(@deposit_amount)
+      increase_balance(@deposit_amount) # will get user deposit and pass it in to the increase_balance(argument), increasing the total wallet amount.
       puts "We are now adding $#{@deposit_amount} to your account!"
       puts
       puts "Your new account balance is $#{@wallet}."
