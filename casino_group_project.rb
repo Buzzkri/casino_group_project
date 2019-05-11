@@ -4,6 +4,7 @@ require_relative "./main_menu.rb"
 # require_relative "./roulette.rb."
 require_relative "./slots.rb"
 # require_relative "./high_low.rb"
+require "pry"
 
 class CasinoProject < Player
   def initialize
@@ -54,7 +55,8 @@ class CasinoProject < Player
     when 4
       #High Low
     when 5
-      slot_requirements
+      @slots_game = Slots.new
+      @slots_game.initialize
     when 6
       main_menu
     else
@@ -110,4 +112,5 @@ class CasinoProject < Player
   end #cashinout_menu
 end # end CasinoProject
 
+binding.pry
 CasinoProject.new

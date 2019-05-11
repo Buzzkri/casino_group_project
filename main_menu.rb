@@ -10,7 +10,7 @@
 #TODO: Fix - When user enters amount using commas into wallet, the program only takes the ints before the commas
 
 class Wallet
-  attr_accessor :money
+  attr_accessor :wallet
 
   def initialize
     @wallet = 0
@@ -31,6 +31,8 @@ class Wallet
     @wallet -= amount  # wallet = amount + wallet
   end #end decrease_balance
 end # end Wallet class
+
+w = Wallet.new
 
 class Player < Wallet
   attr_accessor :playername
@@ -69,5 +71,7 @@ class Player < Wallet
     end #end if
   end #end player_money
 end #end class Player
+
+p = Player.new
 
 # Player.new
