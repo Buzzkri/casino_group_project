@@ -5,7 +5,7 @@
 #Have options to :
 # - view user balance
 # - increase your balance (Deposit)
-# - decrease your balance  (Withdraw)
+# - decrease your balance  (Withdraw and leave the casino with total amount earned)
 
 #TODO: Fix - When user enters amount using commas into wallet, the program only takes the ints before the commas
 
@@ -53,7 +53,7 @@ class Player < Wallet
 
   def player_name
     @playername = gets.strip.to_s
-    puts "Hello, #{@playername}. How much money can you spend at our casino today?"
+    puts "Hello, #{@playername}. How much money can you spend at our casino?"
     player_money
   end #end player_name
 
@@ -64,7 +64,8 @@ class Player < Wallet
       puts "Sorry. We don't deal with broke people."
     else
       puts
-      puts "Thank you! You now have a balance of $#{@wallet}. Have fun at our casino, #{@playername}"
+      puts "Thank you! You now have a balance of $#{@wallet}. Have fun at our casino, #{@playername}."
+      puts
     end #end if
   end #end player_money
 end #end class Player
