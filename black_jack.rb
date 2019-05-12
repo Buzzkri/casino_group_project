@@ -235,7 +235,8 @@ def deal(player, dealer, decks)
     dealer = []   
     
     def place_bet()
-      
+      puts "$#{@wallet} in wallet"
+
       bet_options = [
         "Place Min. Bet",
         "Increase Bet",
@@ -245,7 +246,7 @@ def deal(player, dealer, decks)
           print "#{i + 1}: #{item} "
         end
         print "> ".colorize(:cyan)
-        puts "Min Bet is $50"
+        puts "Min Bet is $10"
         
         case gets.strip
         when "1"
@@ -266,25 +267,23 @@ def deal(player, dealer, decks)
         end
       end
     
-      @money_bet = []
-      @money_lost = []
+      @money_bet = 0
+      @new_wallet_total = 0
       
       def min_bet
-        min_bet = @wallet - 10 
-       puts "#{@wallet} - #{min_bet}"
-      @money_bet << min_bet
-        
-      end
+        min_bet = 10 
+        @money_bet << min_bet
+        end
       
       def increase_bet
         puts "How much would you like to bet? ($10 Min.)"
         print "> "
         bet_increase = gets.to_i
-        if bet <= @wallet && bet != 0
+        if bet_increase <= @wallet && bet_increase != 0
           puts "Ok Big Baller! Lets Play!"
-         puts "#{@wallet} - #{bet_increase}"
+        
         @money_bet << bet_increase
-        elsif bet.to_i > @wallet
+        elsif bet_increase.to_i > @wallet
           puts "Sorry, you only have $@{@wallet}. Go get more money!"
           increase_bet
         else
@@ -293,13 +292,17 @@ def deal(player, dealer, decks)
         end
       end 
 
-      # player_wins_losses_draws adding/subtracting from walllet?
+      # player_wins_losses_draws adding/subtracting from wallet?
        if results[:wins] >= 1
-        # @wallet.each_with_index do |l, i|
-        @wallet << @money_bet.to_i + @money_bet.to_i
-       elsif results[:losses] >= 1
-        @wallet.to_i.delete_at(@money_bet - 1)
+        @new_wallet_total = @wallet + (@money_bet * 2)
+        @wallet << @new_wallet_total
+
+        elsif results[:losses] >= 1
+        @new_wallet_total = @wallet - @money_bet
+        @new_wallet_total << @wallet
        else results[:draws] >= 1
+        @new_wallet_total = @money_bet + @wallet
+        @wallet << @new_wallet_total
         end
         
 
