@@ -1,3 +1,5 @@
+require_relative 'card_class.rb'
+
 class Deck
   # Getter and Setter methods for rank, suit and color
   attr_accessor :cards
@@ -26,12 +28,14 @@ class Deck
     end
   end
  
-   def display_cards
+   def display_cards 
      @cards.shuffle.each do |card|
        puts "#{card.rank} #{card.suit} (#{card.color})"
      end
    end
- end
+ 
+    
+  end
 
  # Instantiate a new deck
 d = Deck.new

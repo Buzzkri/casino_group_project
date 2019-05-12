@@ -1,9 +1,12 @@
 require_relative "./main_menu.rb"
 require_relative "./black_jack.rb"
-# require_relative "./rock_paper_scissors.rb"
+require_relative "./rock_paper_scissors.rb"
 require_relative "./roulette.rb."
-require_relative "slots.rb"
+require_relative "./slots.rb"
 require_relative "./high_low.rb"
+require_relative "./card_class.rb"
+require_relative "./deck_class.rb"
+require_relative "./dice_class.rb"
 
 # require "pry"
 
