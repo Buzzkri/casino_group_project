@@ -10,11 +10,11 @@
 #TODO: Fix - When user enters amount using commas into wallet, the program only takes the ints before the commas
 
 class Wallet
-  attr_accessor :wallet
-
   def initialize
     @wallet = 0
   end #end initialize
+
+  attr_accessor :wallet
 
   def view_balance
     # user can view balance
@@ -23,16 +23,16 @@ class Wallet
 
   def increase_balance(amount)
     # increase user balance
-    @wallet += amount  #wallet = wallet - amount
+    @wallet += amount #wallet = wallet - amount
   end # end increase_balance
 
   def decrease_balance(amount)
     # decrease user balance
-    @wallet -= amount  # wallet = amount + wallet
+    @wallet -= amount # wallet = amount + wallet
   end #end decrease_balance
 end # end Wallet class
 
-w = Wallet.new
+# w = Wallet.new
 
 class Player < Wallet
   attr_accessor :playername
@@ -61,9 +61,10 @@ class Player < Wallet
 
   def player_money
     puts
-    @wallet = gets.strip.to_i
+    @wallet = gets.strip.tap { |s| s.delete!(",") }.to_i #this will remove commas from user input without regex
     if @wallet <= 0
       puts "Sorry. We don't deal with broke people."
+      player_name
     else
       puts
       puts "Thank you! You now have a balance of $#{@wallet}. Have fun at our casino, #{@playername}."
@@ -72,6 +73,6 @@ class Player < Wallet
   end #end player_money
 end #end class Player
 
-p = Player.new
+# p = Player.new
 
 # Player.new

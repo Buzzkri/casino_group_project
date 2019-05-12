@@ -1,10 +1,16 @@
 require_relative "./main_menu.rb"
-# require_relative "./black_jack.rb"
+require_relative "./black_jack.rb"
 # require_relative "./rock_paper_scissors.rb"
-# require_relative "./roulette.rb."
-require_relative "./slots.rb"
-# require_relative "./high_low.rb"
-require "pry"
+require_relative "./roulette.rb."
+require_relative "slots.rb"
+require_relative "./high_low.rb"
+
+# require "pry"
+
+# TODO: Work on increasing and decreasing wallet.
+### possible work-around: create a variable and add or subtract from the @wallet instance
+#### example: @increase_wallet = 50
+############# @wallet += 50
 
 class CasinoProject < Player
   def initialize
@@ -55,8 +61,7 @@ class CasinoProject < Player
     when 4
       #High Low
     when 5
-      @slots_game = Slots.new
-      @slots_game.initialize
+      # Slots.new
     when 6
       main_menu
     else
@@ -95,7 +100,7 @@ class CasinoProject < Player
       puts "How much would you like to deposit?"
       puts
       print "Enter amount > "
-      @deposit_amount = gets.to_i
+      @deposit_amount = gets.strip.tap { |s| s.delete!(",") }.to_i #removes commas and white space
       increase_balance(@deposit_amount) # will get user deposit and pass it in to the increase_balance(argument), increasing the total wallet amount.
       puts "We are now adding $#{@deposit_amount} to your account!"
       puts
@@ -112,5 +117,5 @@ class CasinoProject < Player
   end #cashinout_menu
 end # end CasinoProject
 
-binding.pry
+# binding.pry
 CasinoProject.new

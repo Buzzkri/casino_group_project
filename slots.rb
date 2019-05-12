@@ -3,10 +3,9 @@ require_relative "casino_group_project.rb"
 
 # require "pry"
 # require "colorize"
-class Slots
+class Slots < CasinoProject
   def slot_requirments
-    @player_wallet = Player.new
-    if @player_wallet.player_money == 0
+    if @wallet == 0
       puts
       puts "Insufficent funds to play this game!"
       puts "Would you like to cash in more money?"
@@ -14,10 +13,10 @@ class Slots
       print " > "
       choice == gets.strip.downcase.to_s
       if choice == "y"
-        # cashinout_menu
+        cashinout_menu
       elsif choice == "n"
         puts "Redirecting you to the main lobby..."
-        # main_menu
+        main_menu
       else
         puts "Invalid option."
         slot_requirments
@@ -31,7 +30,7 @@ class Slots
   end #end requirments
 
   def initialize
-    @update_wallet = Wallet.new
+    super()
     @roll_1 = ["Cherries", "Grapes", "Lemon"]
     @roll_2 = ["Cherries", "Grapes", "Lemon"]
     @roll_3 = ["Cherries", "Grapes", "Lemon"]
@@ -44,18 +43,22 @@ class Slots
       puts
       puts "Please put in $50 dollars"
       print " > $"
-      amount = Integer(gets.strip)
+      @amount = Integer(gets.strip)
     rescue
       puts "Please enter $50."
       retry
     end # end begin/rescue
-    if amount == 50
-      @update_wallet.decrease_balance(amount)
+    if @amount == 50
+      # @update_wallet = Wallet.new
+      # @update_wallet.decrease_balance(amount)
+      @wallet = @wallet - @amount #currently works at decreasing wallet amount
+      # decrease_balance(@amount)
+
       slot_game
-    elsif amount > 50
+    elsif @amount > 50
       puts "That's too much money to bet!"
       greeting
-    else amount < 50
+    else @amount < 50
       puts "Insufficient funds!"
       greeting     end #end if
   end # end greeting
@@ -87,9 +90,11 @@ class Slots
     if roll_1 == roll_2 && roll_2 == roll_3
       puts "Congrats! You win the $500 Jackpot!"
       puts
-      amount = $500
-      @update_wallet.increase_balance(amount)
+      @amount = $500
+      @wallet = @wallet + @amount #works on increasing amount
       play_again
+      # @update_wallet.increase_balance(amount)
+      # increase_balance(@amount)
     else roll_1 != roll_2 && roll_2 != roll_3
       puts
       puts "Oops! Looks like you lose!"
@@ -103,9 +108,9 @@ class Slots
     print " > "
     choice = gets.strip.downcase
     if choice == "y"
-      greeting
+      slot_requirments
     elsif choice == "n"
-      # main_menu
+      main_menu
     else
       puts "Invalid Option"
       play_again
@@ -115,4 +120,5 @@ end # end Slots
 
 # binding.pry
 # slot_requirments
-# Slots.new
+Slots.new
+# s = Slots.new
