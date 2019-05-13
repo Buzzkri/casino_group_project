@@ -7,8 +7,8 @@ require_relative 'deck_class.rb'
 def highlow
   greet
   place_bet
-  show_card
-  user_choice
+  deal_cards
+  update_wallet
 end
 
 def greet
@@ -31,47 +31,78 @@ def place_bet
   end
 end
 
-def show_card
+def deal_cards
   puts "Dealer shows:"
-  deck = Deck.new
+  deck = Deck.new # make deck instance variable? @deck?
   shuffle = deck.shuffle_cards
   deal = shuffle.shift
-  next_card = shuffle.first
+  next_card = shuffle.shift
   # card_1 = shuffle.first
   # card_2 = shuffle[1]
-  binding.pry
-   if shuffle.shift == "A" || shuffle.shift == "K"
-      puts "Whelp, that's a bust. Next card shows:"
-      puts "#{next_card.rank} #{next_card.suit} (#{next_card.color})"
-   else puts "#{deal.rank} #{deal.suit} (#{deal.color})"
-      # what if card_2 is also A or K?
-   end
-  puts "What do you think, high or low?"
-  choice = gets.strip.downcase
-  puts "#{deal.rank} #{deal.suit} (#{deal.color})"
-
-  #   shuffle.each_with_index do |top_card, i|
-  #     next if shuffle[0] == "A" || shuffle.slice(0) == "K"
-  #     puts top_card.first
-  #   end
-    # "#{top_card.rank} #{top_card.suit} (#{top_card.color})"
   # dealer shows top card, must be 2-queen
+  if deal.rank == "A" || deal.rank == "K" 
+    puts "Whoops. Next card shows:"
+    puts "#{shuffle.shift.rank} #{shuffle.shift.suit}"
+    # what if card_2 is also A or K?
+  else puts "#{deal.rank} #{deal.suit}"
+  end
+  
+  puts "What do you think the next card is: high or low?"
+  print "> "
+  choice = gets.strip.downcase # true false statement
+    case choice
+      when "high"
+        puts "Let's see if Lady Luck is on your side..."
+        puts "#{next_card.rank} #{next_card.suit}" # dealer reveals next card
+        if next_card.rank > deal.rank ? "You won." : "You lost."
+        else next_card.rank == deal.rank ? "You tied."
+        end
+      when "low"
+        puts "Let's see if Lady Luck is on your side..."
+        puts "#{next_card.rank} #{next_card.suit}" # dealer reveals next card
+        if next_card.rank < deal.rank ? "You won." : "You lost."
+        else next_card.rank == deal.rank ? "You tied."
+        end
+      else
+        puts "Invalid selection. Try again."
+    end
+
+  binding.pry
+ 
+   # code broken after this line
+  # if choice == "high" && next_card.rank > deal.rank ? "You won." : "You lost."
+  #   #puts "It's higher, you won!"
+  # elsif choice == "low" && next_card.rank < deal.rank ? "You won." : "You lost."
+  #   #puts "It's lower, you won!"
+  # else next_card.rank == deal.rank
+  #   puts "It's a tie."
+  # end 
+  
 end
 
+# def high_choice
+#   # true false statement
+#   # if high, and card is higher than previous card, then win
+#   # if low, and card is lower than previous card, then lose
+# end
 
-def user_choice
-  
-  # dealer reveals next card
-  # if high, and card is higher than previous card, then win
-  # if low, and card is lower than previous card, then lose
-  
+# case choice
+#   when "high"
+#     high_choice
+#   when "low"
+#     low_choice
+#   else 
+#     puts "Invalid entry, enter "high" or "low"."
+# end
 
-end
-
-
+def update_wallet
 # if correct, pay 2x the bet
 # if incorrect, lose bet
 # if tie, nothing happens, keep bet
+end
+
+
+
 # continue until user leaves game
 
 
