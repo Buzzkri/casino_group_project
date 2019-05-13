@@ -5,11 +5,7 @@ require "pry"
 require "colorize"
 
 
-<<<<<<< HEAD
-
-=======
 @wallet = 500
->>>>>>> 1efa9ed8d57ef0d70e8bffc329c43d8b7bcd8f7b
 
 def separator
   puts "~" * 100
@@ -239,11 +235,7 @@ def deal(player, dealer, decks)
     dealer = []   
     
     def place_bet()
-<<<<<<< HEAD
-      
-=======
       puts "$#{@wallet} in wallet"
->>>>>>> 1efa9ed8d57ef0d70e8bffc329c43d8b7bcd8f7b
 
       bet_options = [
         "Place Min. Bet",
