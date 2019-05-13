@@ -5,7 +5,7 @@ require "pry"
 require "colorize"
 
 
-@wallet = 500
+
 
 def separator
   puts "~" * 100
@@ -236,6 +236,7 @@ def deal(player, dealer, decks)
     
     def place_bet()
       
+
       bet_options = [
         "Place Min. Bet",
         "Increase Bet",
@@ -245,7 +246,7 @@ def deal(player, dealer, decks)
           print "#{i + 1}: #{item} "
         end
         print "> ".colorize(:cyan)
-        puts "Min Bet is $50"
+        puts "Min Bet is $10"
         
         case gets.strip
         when "1"
@@ -253,9 +254,8 @@ def deal(player, dealer, decks)
           puts "Min. Bet Placed"
           
         when "2"
-          # puts "@{wallet}" Will add later *********
-          puts "How much would you like to bet?"
           increase_bet
+
         when "3"
           puts "Come back soon"
           puts "We will take your money any time"
@@ -266,25 +266,22 @@ def deal(player, dealer, decks)
         end
       end
     
-      @money_bet = []
-      @money_lost = []
-      
       def min_bet
-        min_bet = @wallet - 10 
-       puts "#{@wallet} - #{min_bet}"
-      @money_bet << min_bet
-        
+        puts @wallet.first
+        min_bet = 10 
+        @money_bet << min_bet
       end
       
       def increase_bet
+        puts @wallet.first
         puts "How much would you like to bet? ($10 Min.)"
         print "> "
         bet_increase = gets.to_i
-        if bet <= @wallet && bet != 0
+        bet = @wallet[0].to_i
+        if bet_increase <= bet && bet_increase != 0
           puts "Ok Big Baller! Lets Play!"
-         puts "#{@wallet} - #{bet_increase}"
-        @money_bet << bet_increase
-        elsif bet.to_i > @wallet
+          @money_bet << bet_increase
+        elsif bet_increase > @wallet
           puts "Sorry, you only have $@{@wallet}. Go get more money!"
           increase_bet
         else
@@ -292,14 +289,32 @@ def deal(player, dealer, decks)
           increase_bet
         end
       end 
+      
+      @money_bet = []
+      @new_wallet_total = []
+      @wallet = [500]
 
-      # player_wins_losses_draws adding/subtracting from walllet?
+      # player_wins_losses_draws adding/subtracting from wallet?
        if results[:wins] >= 1
-        # @wallet.each_with_index do |l, i|
-        @wallet << @money_bet.to_i + @money_bet.to_i
-       elsif results[:losses] >= 1
-        @wallet.to_i.delete_at(@money_bet - 1)
+        bet = @money_bet[0].to_i
+        @wallet.map { |item| item += bet }
+       puts "#{@wallet}"
+        # @new_wallet_total = @wallet + (@money_bet * 2)
+        # @wallet.clear
+        # @wallet << @new_wallet_total
+
+        elsif results[:losses] >= 1
+          @wallet.map { |item| item -= bet }
+          puts "#{@wallet}"
+        
+          # @new_wallet_total = @wallet - @money_bet
+          # @wallet.clear 
+
+        @wallet << @new_wallet_total
        else results[:draws] >= 1
+        puts "PUSH"
+        #   @new_wallet_total = @money_bet + @wallet
+        # @wallet << @new_wallet_total
         end
         
 
@@ -351,7 +366,6 @@ def deal(player, dealer, decks)
   
   # play again?
   puts "Play again? (y/n)"
-  
   play_again = gets.chomp
   
 end
