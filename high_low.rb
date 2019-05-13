@@ -1,8 +1,3 @@
-# require_relative './main_menu.rb'
-# require_relative './card_class.rb'
-# require_relative './deck_class.rb'
-
-
 require "pry"
 require_relative 'deck_class.rb'
 # require_relative  "Wallet"
@@ -12,6 +7,8 @@ require_relative 'deck_class.rb'
 def highlow
   greet
   place_bet
+  show_card
+  user_choice
 end
 
 def greet
@@ -25,7 +22,6 @@ def place_bet
   bet = gets.to_i
   if bet <= @wallet && bet != 0
     puts "Ok bigballer, let's play."
-    show_card
   elsif bet > @wallet
     puts "Ok bigballer, you only have $#{@wallet} to play with. Try again."
     place_bet
@@ -38,18 +34,41 @@ end
 def show_card
   puts "Dealer shows:"
   deck = Deck.new
-  card_1 = deck.cards.first
-  puts "#{card_1.rank} #{card_1.suit} (#{card_1.color})"
+  shuffle = deck.shuffle_cards
+  deal = shuffle.shift
+  next_card = shuffle.first
+  # card_1 = shuffle.first
+  # card_2 = shuffle[1]
+  binding.pry
+   if shuffle.shift == "A" || shuffle.shift == "K"
+      puts "Whelp, that's a bust. Next card shows:"
+      puts "#{next_card.rank} #{next_card.suit} (#{next_card.color})"
+   else puts "#{deal.rank} #{deal.suit} (#{deal.color})"
+      # what if card_2 is also A or K?
+   end
+  puts "What do you think, high or low?"
+  choice = gets.strip.downcase
+  puts "#{deal.rank} #{deal.suit} (#{deal.color})"
+
+  #   shuffle.each_with_index do |top_card, i|
+  #     next if shuffle[0] == "A" || shuffle.slice(0) == "K"
+  #     puts top_card.first
+  #   end
+    # "#{top_card.rank} #{top_card.suit} (#{top_card.color})"
+  # dealer shows top card, must be 2-queen
 end
 
 
-# new_deck = deck.shuffle_cards >>> use this when user plays another round
-# def first_card
-#   deck.first
-# end
+def user_choice
+  
+  # dealer reveals next card
+  # if high, and card is higher than previous card, then win
+  # if low, and card is lower than previous card, then lose
+  
 
-# dealer shows random card, must be 2-queen
-# user choices high or low
+end
+
+
 # if correct, pay 2x the bet
 # if incorrect, lose bet
 # if tie, nothing happens, keep bet
