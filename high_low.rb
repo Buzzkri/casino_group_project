@@ -50,33 +50,36 @@ def deal_cards
   puts "What do you think the next card is: high or low?"
   print "> "
   choice = gets.strip.downcase # true false statement
-    case choice
-      when "high"
-        puts "Let's see if Lady Luck is on your side..."
-        puts "#{next_card.rank} #{next_card.suit}" # dealer reveals next card
-        if next_card.rank > deal.rank ? "You won." : "You lost."
-        else next_card.rank == deal.rank ? "You tied."
-        end
-      when "low"
-        puts "Let's see if Lady Luck is on your side..."
-        puts "#{next_card.rank} #{next_card.suit}" # dealer reveals next card
-        if next_card.rank < deal.rank ? "You won." : "You lost."
-        else next_card.rank == deal.rank ? "You tied."
-        end
-      else
-        puts "Invalid selection. Try again."
-    end
-
-  binding.pry
- 
-   # code broken after this line
-  # if choice == "high" && next_card.rank > deal.rank ? "You won." : "You lost."
-  #   #puts "It's higher, you won!"
-  # elsif choice == "low" && next_card.rank < deal.rank ? "You won." : "You lost."
-  #   #puts "It's lower, you won!"
-  # else next_card.rank == deal.rank
-  #   puts "It's a tie."
-  # end 
+    # fix this code
+    # case choice
+    #   when "high"
+    #     puts "Let's see if Lady Luck is on your side..."
+    #     puts "#{next_card.rank} #{next_card.suit}" # dealer reveals next card
+    #     if next_card.rank > deal.rank ? "You won." : "You lost."
+    #     else next_card.rank == deal.rank ? "You tied."
+    #     end
+    #   when "low"
+    #     puts "Let's see if Lady Luck is on your side..."
+    #     puts "#{next_card.rank} #{next_card.suit}" # dealer reveals next card
+    #     if next_card.rank < deal.rank ? "You won." : "You lost."
+    #     else next_card.rank == deal.rank ? "You tied."
+    #     end
+    #   else
+    #     puts "Invalid selection. Try again."
+    # end
+    puts "Let's see if Lady Luck is on your side..."
+    puts "#{next_card.rank} #{next_card.suit}" # dealer reveals next card
+    binding.pry
+  # code broken after this line
+  if choice == "high" && next_card.rank > deal.rank ? 
+    puts "You won."
+    #puts "It's higher, you won!"
+  elsif choice == "low" && next_card.rank < deal.rank
+    puts "You won."
+    #puts "It's lower, you won!"
+  else next_card.rank == deal.rank
+    puts "It's a tie."
+  end 
   
 end
 
